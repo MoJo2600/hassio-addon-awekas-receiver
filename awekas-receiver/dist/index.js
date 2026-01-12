@@ -43,9 +43,16 @@ const startServer = () => __awaiter(void 0, void 0, void 0, function* () {
         process.on("SIGINT", () => shutdown("SIGINT"));
     }
     catch (error) {
-        services_1.default.Log.logError("Failed to start addon:");
+        services_1.default.Log.logError("========================================");
+        services_1.default.Log.logError("FATAL ERROR - Failed to start addon");
+        services_1.default.Log.logError("========================================");
         services_1.default.Log.logError(error.message);
-        process.exit(1);
+        services_1.default.Log.logError("");
+        services_1.default.Log.logError("Please check your configuration and fix the errors above.");
+        services_1.default.Log.logError("The addon will not restart automatically.");
+        services_1.default.Log.logError("========================================");
+        // Sleep forever to prevent restart loop
+        yield new Promise(() => { }); // Never resolves
     }
 });
 startServer();

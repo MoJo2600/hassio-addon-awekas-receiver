@@ -39,4 +39,6 @@ RUN cp -r /build/dist . && \
 # Setup s6-overlay service
 RUN mkdir -p /etc/services.d/awekas-receiver
 COPY run.sh /etc/services.d/awekas-receiver/run
-RUN chmod a+x /etc/services.d/awekas-receiver/run
+COPY finish.sh /etc/services.d/awekas-receiver/finish
+RUN chmod a+x /etc/services.d/awekas-receiver/run && \
+    chmod a+x /etc/services.d/awekas-receiver/finish
