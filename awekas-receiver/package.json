@@ -11,7 +11,8 @@
     "clean": "rimraf ./dist",
     "build": "rimraf ./dist && tsc",
     "start": "nodemon",
-    "test": "jest"
+    "test": "jest",
+    "prepare-addon": "./scripts/prepare-addon.sh"
   },
   "devDependencies": {
     "@babel/core": "^7.28.5",

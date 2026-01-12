@@ -1,4 +1,4 @@
-ARG BUILD_FROM
+ARG BUILD_FROM=ghcr.io/home-assistant/amd64-base:latest
 FROM $BUILD_FROM
 
 # Install Node.js and npm
@@ -17,21 +17,24 @@ LABEL io.hass.name="AWEKAS Receiver" \
       org.opencontainers.image.source="https://github.com/MoJo2600/hassio-addon-awekas-receiver" \
       org.opencontainers.image.licenses="MIT"
 
-# Create app directory
+# Build stage
+WORKDIR /build
+
+# Copy source files
+COPY package*.json tsconfig.json ./
+COPY src ./src
+
+# Install dependencies and build
+RUN npm ci && npm run build
+
+# Production stage
 WORKDIR /app
 
-# Copy built application from parent directory
-COPY ../dist /app/dist
-COPY ../package.json /app/package.json
-COPY ../package-lock.json* /app/
-COPY ../yarn.lock* /app/
-
-# Install production dependencies
-RUN if [ -f yarn.lock ]; then \
-      yarn install --production=true --frozen-lockfile; \
-    else \
-      npm ci --omit=dev; \
-    fi
+# Copy built files and install production dependencies only
+RUN cp -r /build/dist . && \
+    cp /build/package*.json . && \
+    npm ci --omit=dev && \
+    rm -rf /build
 
 # Copy run script
 COPY run.sh /
