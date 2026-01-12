@@ -10,9 +10,13 @@ interface RateLimitParamaters {
 }
 
 export const rateLimitMiddleware = (
-  parameters?: RateLimitParamaters
-): Handler =>
-  SlowDown({
+  parameters?: RateLimitParamaters,
+): Handler => {
+  const delaySeconds =
+    parameters?.rateLimitDelaySeconds ||
+    Environment.getEnvVar("RATE_LIMIT_DELAY_SECONDS");
+  
+  return SlowDown({
     windowMs:
       (parameters?.rateLimitWindowMinutes ||
         Environment.getEnvVar("RATE_LIMIT_WINDOW_MINUTES")) *
@@ -21,7 +25,6 @@ export const rateLimitMiddleware = (
     delayAfter:
       parameters?.rateLimitMaxRequests ||
       Environment.getEnvVar("RATE_LIMIT_MAX_REQUESTS"),
-    delayMs:
-      (parameters?.rateLimitDelaySeconds ||
-        Environment.getEnvVar("RATE_LIMIT_DELAY_SECONDS")) * 1000,
+    delayMs: (used, req) => (used - (req.slowDown?.limit ?? 0)) * delaySeconds * 1000,
   });
+};

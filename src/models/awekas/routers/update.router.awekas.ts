@@ -7,7 +7,7 @@ import * as Handlers from "../handlers";
 
 export const updateData: RequestHandler<{}, string, {}, AwekasQuery> = (
   req,
-  res
+  res,
 ) => {
   if (!Domain.validateRequest(req.query)) {
     Services.Log.logWarn("Bad request", { ip: req.ip, query: req.query });

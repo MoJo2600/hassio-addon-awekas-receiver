@@ -1,7 +1,7 @@
 import { defaults, EnvironmentVars } from "./model.environment.services";
 
 export const getEnvVar = <T extends keyof EnvironmentVars>(
-  environmentVar: T
+  environmentVar: T,
 ): EnvironmentVars[T] =>
   (Object.keys(defaults).some((key) => key === environmentVar) &&
     // Prevented with ⤴ that function

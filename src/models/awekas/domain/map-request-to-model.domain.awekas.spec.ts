@@ -27,7 +27,7 @@ describe("mapRequestToModel maps an Awekas Request to its model in SI", () => {
         rtfreq: "test",
         windgustmph: "2.2",
         windspeedmph: "2.2",
-      })
+      }),
     ).toEqual({
       barometer: 29.74,
       dailyRain: 2,

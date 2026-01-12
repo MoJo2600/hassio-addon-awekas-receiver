@@ -33,24 +33,24 @@ describe("validateRequest validates an Awekas request", () => {
     expect(validateRequest({ ...correctRequest, ID: undefined })).toBeFalsy();
     expect(validateRequest({ ...correctRequest, ID: "" })).toBeFalsy();
     expect(
-      validateRequest({ ...correctRequest, PASSWORD: undefined })
+      validateRequest({ ...correctRequest, PASSWORD: undefined }),
     ).toBeFalsy();
     expect(validateRequest({ ...correctRequest, PASSWORD: "" })).toBeFalsy();
     expect(
-      validateRequest({ ...correctRequest, action: undefined })
+      validateRequest({ ...correctRequest, action: undefined }),
     ).toBeFalsy();
     expect(validateRequest({ ...correctRequest, action: "test" })).toBeFalsy();
     expect(
-      validateRequest({ ...correctRequest, realtime: undefined })
+      validateRequest({ ...correctRequest, realtime: undefined }),
     ).toBeFalsy();
     expect(
-      validateRequest({ ...correctRequest, realtime: "other" })
+      validateRequest({ ...correctRequest, realtime: "other" }),
     ).toBeFalsy();
     expect(
-      validateRequest({ ...correctRequest, dateutc: undefined })
+      validateRequest({ ...correctRequest, dateutc: undefined }),
     ).toBeFalsy();
     expect(
-      validateRequest({ ...correctRequest, dateutc: "other" })
+      validateRequest({ ...correctRequest, dateutc: "other" }),
     ).toBeFalsy();
   });
 

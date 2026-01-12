@@ -8,5 +8,5 @@ export const mapAwekasToPoint =
     Object.keys(awekas).map((key) =>
       new Point(key)
         .tag("station", sensorId)
-        .floatField("value", awekas[key as keyof Awekas.Awekas] as number)
+        .floatField("value", awekas[key as keyof Awekas.Awekas] as number),
     );

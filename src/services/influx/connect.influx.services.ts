@@ -8,5 +8,5 @@ export const connect = (): WriteApi =>
     token: Environment.getEnvVar("INFLUX_TOKEN"),
   }).getWriteApi(
     Environment.getEnvVar("INFLUX_ORG"),
-    Environment.getEnvVar("INFLUX_BUCKET")
+    Environment.getEnvVar("INFLUX_BUCKET"),
   );

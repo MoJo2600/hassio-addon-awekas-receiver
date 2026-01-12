@@ -18,7 +18,7 @@ describe("toSI converts request to SI units", () => {
         uv: 1.9,
         indoorTemperature: 69.4,
         indoorHumidity: 62,
-      })
+      }),
     ).toEqual({
       barometer: 1007.1120885999999,
       dailyRain: 50.8,

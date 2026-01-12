@@ -14,7 +14,7 @@ export const initHTTP = () => {
   app.use(Awekas.Router);
   return app.listen(Environment.getEnvVar("PORT"), () => {
     Log.logInfo(
-      `Awekas receiver listening on port ${Environment.getEnvVar("PORT")}`
+      `Awekas receiver listening on port ${Environment.getEnvVar("PORT")}`,
     );
   });
 };

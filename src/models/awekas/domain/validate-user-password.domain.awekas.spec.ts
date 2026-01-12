@@ -29,7 +29,7 @@ jest.mock("../../../services", () => {
       validateUserPassword: jest
         .fn()
         .mockImplementation(
-          (id, password) => id === "test" && password === "test"
+          (id, password) => id === "test" && password === "test",
         ),
     },
   };
