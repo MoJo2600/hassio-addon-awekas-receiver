@@ -31,4 +31,3 @@ schema:
   rate_limit_max_requests: int(1,)?
   rate_limit_window_minutes: int(1,)?
   rate_limit_delay_seconds: int(1,)?
-image: ghcr.io/mojo2600/hassio-addon-awekas-receiver-{arch}
