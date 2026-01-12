@@ -33,17 +33,17 @@ const startServer = async () => {
     process.on("SIGTERM", () => shutdown("SIGTERM"));
     process.on("SIGINT", () => shutdown("SIGINT"));
   } catch (error: any) {
-    Services.Log.logError("========================================");
-    Services.Log.logError("FATAL ERROR - Failed to start addon");
-    Services.Log.logError("========================================");
+    Services.Log.logError("=".repeat(60));
+    Services.Log.logError("FATAL ERROR: Failed to start addon");
+    Services.Log.logError("=".repeat(60));
     Services.Log.logError(error.message);
     Services.Log.logError("");
-    Services.Log.logError("Please check your configuration and fix the errors above.");
-    Services.Log.logError("The addon will not restart automatically.");
-    Services.Log.logError("========================================");
+    Services.Log.logError("Please check your InfluxDB configuration and try again.");
+    Services.Log.logError("The addon has stopped. Fix the configuration and restart.");
+    Services.Log.logError("=".repeat(60));
     
-    // Sleep forever to prevent restart loop
-    await new Promise(() => {}); // Never resolves
+    // Exit with error code - addon will show as "stopped" in HA
+    process.exit(1);
   }
 };
 

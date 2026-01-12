@@ -17,28 +17,19 @@ LABEL io.hass.name="AWEKAS Receiver" \
       org.opencontainers.image.source="https://github.com/MoJo2600/hassio-addon-awekas-receiver" \
       org.opencontainers.image.licenses="MIT"
 
-# Build stage
-WORKDIR /build
+# Set working directory
+WORKDIR /app
 
 # Copy source files
 COPY package*.json tsconfig.json ./
 COPY src ./src
 
 # Install dependencies and build
-RUN npm ci && npm run build
-
-# Production stage
-WORKDIR /app
-
-# Copy built files and install production dependencies only
-RUN cp -r /build/dist . && \
-    cp /build/package*.json . && \
-    npm ci --omit=dev && \
-    rm -rf /build
+RUN npm ci && \
+    npm run build && \
+    npm prune --production
 
 # Setup s6-overlay service
 RUN mkdir -p /etc/services.d/awekas-receiver
 COPY run.sh /etc/services.d/awekas-receiver/run
-COPY finish.sh /etc/services.d/awekas-receiver/finish
-RUN chmod a+x /etc/services.d/awekas-receiver/run && \
-    chmod a+x /etc/services.d/awekas-receiver/finish
+RUN chmod a+x /etc/services.d/awekas-receiver/run
