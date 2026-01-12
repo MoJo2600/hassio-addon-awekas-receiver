@@ -27,11 +27,37 @@ npm run build
 npm start
 ```
 
-## Testing the Build
+## Testing the Docker Build
+
+You can build the Docker image, but **cannot run it directly** because it requires Home Assistant's supervisor (s6-overlay):
 
 ```bash
-# From repository root
+# Build only (from repository root)
 docker build awekas-receiver/
+```
+
+To actually test the addon, you need to:
+1. Install it in a real Home Assistant instance
+2. Or use the Home Assistant Builder for testing
+
+## Testing Without Home Assistant
+
+For local development without Home Assistant, run the app directly:
+
+```bash
+cd awekas-receiver
+
+# Set environment variables
+export PORT=3000
+export INFLUX_URL=http://localhost:8086
+export INFLUX_TOKEN=your-token
+export INFLUX_ORG=your-org
+export INFLUX_BUCKET=test
+export HASH_SALT=awekas
+export ENABLED_USERS=TORRE01
+
+# Run the app
+npm start
 ```
 
 ## Publishing

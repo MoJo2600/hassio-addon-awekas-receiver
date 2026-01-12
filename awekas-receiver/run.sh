@@ -34,4 +34,4 @@ bashio::log.info "Connecting to InfluxDB at ${INFLUX_URL}"
 
 # Start the application
 cd /app
-exec node index.js
+exec node dist/index.js

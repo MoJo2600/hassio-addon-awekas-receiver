@@ -36,8 +36,7 @@ RUN cp -r /build/dist . && \
     npm ci --omit=dev && \
     rm -rf /build
 
-# Copy run script
-COPY run.sh /
-RUN chmod a+x /run.sh
-
-CMD ["/run.sh"]
+# Setup s6-overlay service
+RUN mkdir -p /etc/services.d/awekas-receiver
+COPY run.sh /etc/services.d/awekas-receiver/run
+RUN chmod a+x /etc/services.d/awekas-receiver/run
