@@ -3,3 +3,5 @@ node_modules
 dist
 coverage
 yarn-error.log
+home-assistant.io/
+repository.json

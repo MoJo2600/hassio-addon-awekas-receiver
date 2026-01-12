@@ -1,0 +1,34 @@
+{
+  "name": "AWEKAS Receiver",
+  "version": "1.0.0",
+  "slug": "awekas-receiver",
+  "description": "Awekas receiver for Bresser weather stations to publish data on Influx DB",
+  "arch": ["armhf", "armv7", "aarch64", "amd64", "i386"],
+  "startup": "application",
+  "boot": "auto",
+  "ports": {
+    "3000/tcp": 3000
+  },
+  "ports_description": {
+    "3000/tcp": "HTTP API port"
+  },
+  "options": {
+    "influx_url": "http://influxdb:8086",
+    "influx_org": "",
+    "influx_bucket": "weather",
+    "hash_salt": "awekas",
+    "enabled_users": "TORRE01"
+  },
+  "schema": {
+    "influx_url": "str",
+    "influx_token": "password",
+    "influx_org": "str",
+    "influx_bucket": "str",
+    "hash_salt": "str",
+    "enabled_users": "str",
+    "rate_limit_max_requests": "int(1,)?",
+    "rate_limit_window_minutes": "int(1,)?",
+    "rate_limit_delay_seconds": "int(1,)?"
+  },
+  "image": "ghcr.io/mojo2600/hassio-addon-awekas-receiver-{arch}"
+}
