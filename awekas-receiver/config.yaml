@@ -1,5 +1,5 @@
 name: AWEKAS Receiver
-version: "1.0.1"
+version: "1.0.2"
 slug: awekas-receiver
 description: Awekas receiver for Bresser weather stations to publish data on Influx DB
 url: https://github.com/MoJo2600/hassio-addon-awekas-receiver

@@ -1,4 +1,10 @@
-#!/usr/bin/with-contenv bashio
+#!/command/with-contenv bashio
+# ==============================================================================
+# Home Assistant Add-on: AWEKAS Receiver
+# Runs the AWEKAS Receiver application
+# ==============================================================================
+
+bashio::log.info "Starting AWEKAS Receiver..."
 
 # Read configuration from Home Assistant
 export PORT=3000
@@ -29,9 +35,8 @@ else
     export RATE_LIMIT_DELAY_SECONDS=2
 fi
 
-bashio::log.info "Starting AWEKAS Receiver..."
 bashio::log.info "Connecting to InfluxDB at ${INFLUX_URL}"
 
 # Start the application
-cd /app
+cd /app || bashio::exit.nok "Could not change to app directory"
 exec node dist/index.js
