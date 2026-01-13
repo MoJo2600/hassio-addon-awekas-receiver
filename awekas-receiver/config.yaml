@@ -1,5 +1,5 @@
 name: AWEKAS Receiver
-version: "1.0.6"
+version: "1.0.7"
 slug: awekas-receiver
 description: Awekas receiver for Bresser weather stations to publish data on Influx DB
 url: https://github.com/MoJo2600/hassio-addon-awekas-receiver
@@ -19,6 +19,7 @@ ports_description:
   3000/tcp: HTTP API port
 options:
   influx_url: http://influxdb:8086
+  influx_token: ""
   influx_org: ""
   influx_bucket: weather
   hash_salt: awekas
