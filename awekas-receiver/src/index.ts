@@ -5,6 +5,9 @@ const startServer = async () => {
     // Configure environment
     Services.Environment.configureEnv();
 
+    // Validate required configuration before starting services
+    Services.Environment.validateConfig();
+
     // Initialize and validate InfluxDB connection
     Services.Log.logInfo("Validating InfluxDB configuration...");
     await Services.Influx.initialize();
@@ -38,10 +41,14 @@ const startServer = async () => {
     Services.Log.logError("=".repeat(60));
     Services.Log.logError(error.message);
     Services.Log.logError("");
-    Services.Log.logError("Please check your InfluxDB configuration and try again.");
-    Services.Log.logError("The addon has stopped. Fix the configuration and restart.");
+    Services.Log.logError(
+      "Please check your add-on configuration (InfluxDB credentials, users, salts) and try again.",
+    );
+    Services.Log.logError(
+      "The addon has stopped. Fix the configuration and restart.",
+    );
     Services.Log.logError("=".repeat(60));
-    
+
     // Exit with error code - addon will show as "stopped" in HA
     process.exit(1);
   }

@@ -1,3 +1,7 @@
+## 1.0.10
+
+- Block add-on startup when required configuration values are missing to avoid running with incomplete setup
+
 ## 1.0.9
 
 - Fix add-on watchdog URL to satisfy Supervisor schema requirements (tcp://[HOST]:3000)
