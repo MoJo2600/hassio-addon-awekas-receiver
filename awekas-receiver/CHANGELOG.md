@@ -1,3 +1,11 @@
+## 1.0.13
+
+- Handle uncaught exceptions and unhandled rejections gracefully, logging errors and allowing watchdog to restart the container
+
+## 1.0.12
+
+- Stop restarting on missing configuration by validating in run.sh and exiting cleanly until the user fixes settings
+
 ## 1.0.10
 
 - Block add-on startup when required configuration values are missing to avoid running with incomplete setup

@@ -6,6 +6,16 @@
 
 bashio::log.info "Starting AWEKAS Receiver..."
 
+# Validate required configuration before starting the app to avoid restart loops
+required_keys=(influx_url influx_token influx_org influx_bucket hash_salt enabled_users)
+for key in "${required_keys[@]}"; do
+    if ! bashio::config.has_value "${key}"; then
+        bashio::log.error "Missing required configuration option: ${key}."
+        bashio::log.error "Set the required options in the add-on configuration and restart the add-on."
+        bashio::log.error "Add-on will remain stopped until configuration is complete."
+        exit 0
+    fi
+done
 # Read configuration from Home Assistant
 export PORT=3000
 export NODE_ENV=production

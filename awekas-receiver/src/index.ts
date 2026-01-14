@@ -35,6 +35,35 @@ const startServer = async () => {
 
     process.on("SIGTERM", () => shutdown("SIGTERM"));
     process.on("SIGINT", () => shutdown("SIGINT"));
+
+    // Handle uncaught exceptions
+    process.on("uncaughtException", (error: Error) => {
+      Services.Log.logError("=".repeat(60));
+      Services.Log.logError("UNCAUGHT EXCEPTION");
+      Services.Log.logError("=".repeat(60));
+      Services.Log.logError(error.message);
+      Services.Log.logError(error.stack || "");
+      Services.Log.logError(
+        "The addon has crashed. Watchdog will restart the container.",
+      );
+      Services.Log.logError("=".repeat(60));
+      process.exit(1);
+    });
+
+    // Handle unhandled promise rejections
+    process.on("unhandledRejection", (reason: any) => {
+      Services.Log.logError("=".repeat(60));
+      Services.Log.logError("UNHANDLED PROMISE REJECTION");
+      Services.Log.logError("=".repeat(60));
+      Services.Log.logError(
+        typeof reason === "string" ? reason : JSON.stringify(reason),
+      );
+      Services.Log.logError(
+        "The addon has crashed. Watchdog will restart the container.",
+      );
+      Services.Log.logError("=".repeat(60));
+      process.exit(1);
+    });
   } catch (error: any) {
     Services.Log.logError("=".repeat(60));
     Services.Log.logError("FATAL ERROR: Failed to start addon");
