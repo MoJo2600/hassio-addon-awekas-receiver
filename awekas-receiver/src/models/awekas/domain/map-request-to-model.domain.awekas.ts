@@ -1,20 +1,31 @@
 import { Awekas, AwekasQuery } from "../awekas.model";
 import { toSI } from "./convert-si.domain.awekas";
 
-export const mapRequestToModel = (request: AwekasQuery): Awekas =>
-  request &&
-  toSI({
-    barometer: +request.baromin,
-    temperature: +request.tempf,
-    dewPoint: +request.dewptf,
-    humidity: +request.humidity,
-    windSpeed: +request.windspeedmph,
-    windGust: +request.windgustmph,
-    windDirection: +request.winddir,
-    rain: +request.rainin,
-    dailyRain: +request.dailyrainin,
-    solarRadiation: +request.solarradiation,
-    uv: +request.UV,
-    indoorTemperature: +request.indoortempf,
-    indoorHumidity: +request.indoorhumidity,
+const parseNumber = (value: any): number => {
+  const num = +value;
+  if (isNaN(num)) {
+    throw new Error(`Invalid numeric value: ${value}`);
+  }
+  return num;
+};
+
+export const mapRequestToModel = (request: AwekasQuery): Awekas => {
+  if (!request) {
+    throw new Error("Request object is required");
+  }
+  return toSI({
+    barometer: parseNumber(request.baromin),
+    temperature: parseNumber(request.tempf),
+    dewPoint: parseNumber(request.dewptf),
+    humidity: parseNumber(request.humidity),
+    windSpeed: parseNumber(request.windspeedmph),
+    windGust: parseNumber(request.windgustmph),
+    windDirection: parseNumber(request.winddir),
+    rain: parseNumber(request.rainin),
+    dailyRain: parseNumber(request.dailyrainin),
+    solarRadiation: parseNumber(request.solarradiation),
+    uv: parseNumber(request.UV),
+    indoorTemperature: parseNumber(request.indoortempf),
+    indoorHumidity: parseNumber(request.indoorhumidity),
   });
+};

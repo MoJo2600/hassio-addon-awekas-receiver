@@ -1,3 +1,7 @@
+## 1.0.14
+
+- Add `/state` endpoint to expose latest weather measurements to Home Assistant via REST sensor
+
 ## 1.0.13
 
 - Handle uncaught exceptions and unhandled rejections gracefully, logging errors and allowing watchdog to restart the container

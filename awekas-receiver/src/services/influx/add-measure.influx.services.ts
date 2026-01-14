@@ -8,5 +8,7 @@ export const addMeasure =
   (sensorId: string): Promise<void> => {
     const writeApi = connect();
     writeMeasure(writeApi)(mapAwekasToPoint(sensorId)(measure));
-    return writeApi.close();
+    // Flush pending batches but don't close the connection
+    // Connection stays open for the lifetime of the app
+    return writeApi.flush();
   };
